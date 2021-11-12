@@ -7,41 +7,54 @@ public class AddressBook {
 	ArrayList<Contact> contactList = new ArrayList<Contact>();
 
 	Contact contact = new Contact();
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook ab = new AddressBook();
 		int option = 1;
-do {
-	
-	
+		do {
 
-		System.out.println("Enter 1 to add contact \nEnter 2 to edit  \n Enter 5 to exits");
-		System.out.println("Enter the option : ");
-		 option = sc.nextInt();
-		switch (option) {
-		case 1:
-			
-			ab.addContact();
-			 
-		
-			break;
+			System.out.println("Enter 1 to add contact \nEnter 2 to edit \nEnter 3 to delete \nEnter 5 to exits");
+			System.out.println("Enter the option : ");
+			option = sc.nextInt();
+			switch (option) {
+			case 1:
 
-		case 2:
-			ab.updateContact();
-			
-			
-			break;
-		case 5:
-			System.out.println("Thank you");
-			System.exit(0);
-			
+				ab.addContact();
 
-		default:
-			System.out.println("Invalid Option");
-		} 
-}while(option < 5 || option > 0);
+				break;
+
+			case 2:
+				ab.updateContact();
+
+				break;
+
+			case 3:
+				ab.deleteContact();
+
+				break;
+			case 5:
+				System.out.println("Thank you");
+				System.exit(0);
+
+			default:
+				System.out.println("Invalid Option");
+			}
+		} while (option < 5 || option > 0);
 	}
-	
+
+	private void deleteContact() {
+		System.out.println("Delete");
+		System.out.println("Enter the first name : ");
+		String deleteName = sc.next();
+		for (int i = 0; i < contactList.size(); i++) {
+			if (contactList.get(i).getFirstName().equals(deleteName)) {
+				contactList.remove(i);
+			}
+
+		}
+	}
+
 	private void updateContact() {
 		// TODO Auto-generated method stub
 		System.out.println("Edit");
@@ -51,7 +64,7 @@ do {
 			if (contactList.get(i).getFirstName().equals(name)) {
 				System.out.println("Enter the Last Name : ");
 				String newLastName = sc.next();
-			contact.setLastName(newLastName);
+				contact.setLastName(newLastName);
 
 				System.out.println("Enter the Address : ");
 				String newAddress = sc.next();
@@ -77,8 +90,9 @@ do {
 				String newEmail = sc.next();
 				contact.setEmail(newEmail);
 			}
+		}
 	}
-	}
+
 	private void addContact() {
 		System.out.println("Add");
 		System.out.println("Enter the First Name : ");
@@ -116,9 +130,9 @@ do {
 		contactList.add(contact);
 
 		for (Contact c : contactList) {
-			System.out.println(c.getFirstName() + " " + c.getLastName() + " " + c.getAddress() + " " + c.getCity()
-					+ " " + c.getState() + " " + c.getPhoneNumber() + " " + c.getZip() + " " + c.getEmail());
+			System.out.println(c.getFirstName() + " " + c.getLastName() + " " + c.getAddress() + " " + c.getCity() + " "
+					+ c.getState() + " " + c.getPhoneNumber() + " " + c.getZip() + " " + c.getEmail());
 		}
-		
+
 	}
 }
