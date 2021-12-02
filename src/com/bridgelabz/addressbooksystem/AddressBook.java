@@ -1,20 +1,23 @@
 package com.bridgelabz.addressbooksystem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class AddressBook {
 	Scanner sc = new Scanner(System.in);
-	ArrayList<Contact> contactList = new ArrayList<Contact>();
+	private List<Contact> contactList = new ArrayList<Contact>();
 
 	Contact contact = new Contact();
-
+	boolean flag = true;
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook ab = new AddressBook();
 		int option = 1;
 		do {
 
-			System.out.println("Enter 1 to add contact \nEnter 2 to edit \nEnter 3 to delete \nEnter 5 to exits");
+			System.out.println("Enter 1 to add contact \nEnter 2 to edit \nEnter 3 to delete \nEnter 4 to print \nEnter 5 to exits");
 			System.out.println("Enter the option : ");
 			option = sc.nextInt();
 			switch (option) {
@@ -33,6 +36,12 @@ public class AddressBook {
 				ab.deleteContact();
 
 				break;
+				
+			case 4:
+				ab.displayContact();
+				
+				break;
+				
 			case 5:
 				System.out.println("Thank you");
 				System.exit(0);
@@ -42,6 +51,22 @@ public class AddressBook {
 			}
 		} while (option < 5 || option > 0);
 	}
+
+
+	private void displayContact() {	
+			System.out.println("Print");
+			int i = 1;
+			for (Contact c : contactList) {
+				System.out.println(
+						"Contact." + i + " [ FirstName=" + c.getFirstName() + ", FastName=" + c.getLastName() + ", Address="
+								+ c.getAddress() + ", city=" + c.getCity() + ", state=" + c.getState() + ", zip-code="
+								+ c.getZip() + ", Phone Number=" + c.getPhoneNumber() + ", email=" + c.getEmail() + "]");
+				i++;
+			}
+		}
+				
+			
+			
 
 	private void deleteContact() {
 		System.out.println("Delete");
@@ -54,14 +79,16 @@ public class AddressBook {
 
 		}
 	}
+	
+	
 
-	private void updateContact() {
-		// TODO Auto-generated method stub
+	public void updateContact() {
+		
 		System.out.println("Edit");
 		System.out.println("Enter the first Name : ");
 		String name = sc.next();
-		for (int i = 0; i < contactList.size(); i++) {
-			if (contactList.get(i).getFirstName().equals(name)) {
+		//for (int i = 0; i < contactList.size(); i++) {
+		//	if (contactList.get(i).getFirstName().equals(name)) {
 				System.out.println("Enter the Last Name : ");
 				String newLastName = sc.next();
 				contact.setLastName(newLastName);
@@ -89,9 +116,13 @@ public class AddressBook {
 				System.out.println("Enter the E-mail: ");
 				String newEmail = sc.next();
 				contact.setEmail(newEmail);
+				
+				contactList.add(contact);
+//						}
+	
 			}
-		}
-	}
+		//}
+	//}
 
 	private void addContact() {
 		System.out.println("Add");
