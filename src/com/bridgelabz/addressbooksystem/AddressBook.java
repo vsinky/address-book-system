@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AddressBook {
+	String firstName;
+	String lastName;
+	String address;
+	String city;
+	String state;
+	int zip;
+	long phoneNumber;
+	String email;
 	Scanner sc = new Scanner(System.in);
 	private List<Contact> contactList = new ArrayList<Contact>();
 
@@ -87,8 +95,8 @@ public class AddressBook {
 		System.out.println("Edit");
 		System.out.println("Enter the first Name : ");
 		String name = sc.next();
-		//for (int i = 0; i < contactList.size(); i++) {
-		//	if (contactList.get(i).getFirstName().equals(name)) {
+		for (int i = 0; i < contactList.size(); i++) {
+			if (contactList.get(i).getFirstName().equals(name)) {
 				System.out.println("Enter the Last Name : ");
 				String newLastName = sc.next();
 				contact.setLastName(newLastName);
@@ -118,16 +126,18 @@ public class AddressBook {
 				contact.setEmail(newEmail);
 				
 				contactList.add(contact);
-//						}
+						}
 	
 			}
-		//}
-	//}
+		}
+	
 
 	private void addContact() {
+		contactList.add(contact);
 		System.out.println("Add");
 		System.out.println("Enter the First Name : ");
 		String firstName = sc.next();
+		if (getIndex(firstName)==-1) {
 		contact.setFirstName(firstName);
 
 		System.out.println("Enter the Last Name : ");
@@ -157,13 +167,37 @@ public class AddressBook {
 		System.out.println("Enter the E-mail: ");
 		String email = sc.next();
 		contact.setEmail(email);
-
-		contactList.add(contact);
-
-		for (Contact c : contactList) {
-			System.out.println(c.getFirstName() + " " + c.getLastName() + " " + c.getAddress() + " " + c.getCity() + " "
-					+ c.getState() + " " + c.getPhoneNumber() + " " + c.getZip() + " " + c.getEmail());
+		//contactList.add(Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email));
+		}else {
+			System.out.println("");
 		}
+		
+		
+			
+		
 
+//		for (Contact c : contactList) {
+//			System.out.println(c.getFirstName() + " " + c.getLastName() + " " + c.getAddress() + " " + c.getCity() + " "
+//					+ c.getState() + " " + c.getPhoneNumber() + " " + c.getZip() + " " + c.getEmail());
+//		}
+
+	}
+
+
+	
+
+
+
+
+
+
+	private int getIndex(String firstName) {
+		int index = -1;
+		for (int i = 0; i < contactList.size(); i++) {
+			if (firstName.equals(contactList.get(i).getFirstName())) {
+				return i;
+			}
+		}
+		return index;
 	}
 }

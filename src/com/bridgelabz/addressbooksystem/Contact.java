@@ -14,7 +14,15 @@ public class Contact {
 		this.email = email;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
+	
 	}
+	//@Override
+//		public String toString() {
+	//		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="/
+//					+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
+	//				+ ", email=" + email + "]";
+	//	}
+	
 
 	public Contact() {
 
@@ -84,10 +92,5 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	}
 	
-//	@Override
-//	public String toString() {
-//		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
-//				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-//				+ ", email=" + email + "]";
-//	}
+	
 }
