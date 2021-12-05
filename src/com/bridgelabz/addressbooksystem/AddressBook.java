@@ -34,7 +34,7 @@ public class AddressBook {
 			switch (option) {
 			case 1:
 
-				System.out.println("enter no of contacts to be added");
+				System.out.println("Enter no of contacts to be added");
 				int noOfContacts = sc.nextInt();
 				for (int i = 0; i < noOfContacts; i++) {
 					ad.addContactDetails();
@@ -86,8 +86,26 @@ public class AddressBook {
 		}
 		}
 	
+	private void searchPersonByState(String stateName) {
+		
+	for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+		AddressBookDetails value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByState(stateName);
+		}
+	}
+
+	private void searchPersonByCity(String cityName) {
+		
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByCity(cityName);
+		}
+	}
+
 	
-	//main method 
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook addressBook = new AddressBook();
@@ -110,13 +128,28 @@ public class AddressBook {
 					break;
 				}
 			}
-			
 			case 2:
-				for (Map.Entry<String, AddressBookDetails > entry : addressBook.addressBookListMap.entrySet()) {
-					AddressBookDetails  value = entry.getValue();
+				for (Map.Entry<String, AddressBookDetails> entry : addressBook.addressBookListMap.entrySet()) {
+					AddressBookDetails value = entry.getValue();
 					System.out.println("Address Book Name: " + entry.getKey());
 					value.checkDuplicate();
 				}
+			case 3:
+				System.out.println("Enter Name of City: ");
+				String CityName = sc.next();
+				addressBook.searchPersonByCity(CityName);
+				break;
+
+			case 4: {
+				System.out.println("Enter Name of State: ");
+				String StateName = sc.next();
+				addressBook.searchPersonByState(StateName);
+				break;
+			}
+
+			case 5:
+				flag = false;
+				break;
 			}
 		}
 	}

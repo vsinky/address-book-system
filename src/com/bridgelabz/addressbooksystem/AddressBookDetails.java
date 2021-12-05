@@ -179,4 +179,13 @@ public class AddressBookDetails {
 
 
     }
+
+	public void getPersonNameByState(String stateName) {
+//		// TODO Auto-generated method stub
+	}
+
+	public void getPersonNameByCity(String cityName) {
+		// TODO Auto-generated method stub
+		
+	}
 }
