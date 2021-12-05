@@ -13,12 +13,12 @@ public class AddressBook {
 	String city;
 	String state;
 	int zip;
-	long phoneNumber;
+	String phoneNumber;
 	String email;
 	Scanner sc = new Scanner(System.in);
 
 	AddressBookDetails  ad = new AddressBookDetails ();
-	public Map<String, AddressBookDetails > addressBookListMap = new HashMap<>();
+	 Map<String, AddressBookDetails > addressBookListMap = new HashMap<>();
 	private String addressBookName;
 
 	
@@ -85,27 +85,7 @@ public class AddressBook {
 			}
 		}
 		}
-	
-	private void searchPersonByState(String stateName) {
 		
-	for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
-		AddressBookDetails value = entry.getValue();
-			System.out.println("The Address Book: " + entry.getKey());
-			value.getPersonNameByState(stateName);
-		}
-	}
-
-	private void searchPersonByCity(String cityName) {
-		
-		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
-			AddressBookDetails value = entry.getValue();
-			System.out.println("The Address Book: " + entry.getKey());
-			value.getPersonNameByCity(cityName);
-		}
-	}
-
-	
-	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook addressBook = new AddressBook();
@@ -153,6 +133,24 @@ public class AddressBook {
 			}
 		}
 	}
+	
+	private void searchPersonByState(String stateName) {
+		
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+				System.out.println("The Address Book: " + entry.getKey());
+				value.getPersonNameByState(stateName);
+			}
+		}
+
+		private void searchPersonByCity(String cityName) {
+			
+			for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+				AddressBookDetails value = entry.getValue();
+				System.out.println("The Address Book: " + entry.getKey());
+				value.getPersonNameByCity(cityName);
+			}
+		}	
 }
 		
 	

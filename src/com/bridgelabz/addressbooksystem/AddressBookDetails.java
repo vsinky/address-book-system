@@ -3,6 +3,7 @@ package com.bridgelabz.addressbooksystem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -123,9 +124,10 @@ public class AddressBookDetails {
                     }
 
                 }
+                while (choice < 5 || choice > 0);
 
                 flag = 1;
-                break;
+               break;
             }
         }
         if(flag==1)
@@ -171,6 +173,7 @@ public class AddressBookDetails {
    
     public void checkDuplicate() {
         Set<String> ContactSet = new HashSet<>();
+        
         Set<Contact> filterSet = contact.stream().filter(n -> !ContactSet.add(n.getFirstName())).collect(Collectors.toSet());
 
         for (Contact contact : filterSet) {
@@ -181,11 +184,18 @@ public class AddressBookDetails {
     }
 
 	public void getPersonNameByState(String stateName) {
-//		// TODO Auto-generated method stub
+		List<Contact> list  = contact.stream().filter(p ->p.getState().equals(stateName)).collect(Collectors.toList());
+        for(Contact contact:list){
+            System.out.println("First Name: "+contact.getFirstName());
+            System.out.println("Last Name: "+contact.getLastName());
+        }
 	}
 
 	public void getPersonNameByCity(String cityName) {
-		// TODO Auto-generated method stub
-		
+		 List<Contact> list  = contact.stream().filter(p ->p.getCity().equals(cityName)).collect(Collectors.toList());
+	        for(Contact contact: list){
+	            System.out.println("First Name: "+contact.getFirstName());
+	            System.out.println("Last Name: "+contact.getLastName());
+	        }
 	}
 }
