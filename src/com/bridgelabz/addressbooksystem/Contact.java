@@ -1,11 +1,11 @@
 package com.bridgelabz.addressbooksystem;
 
 public class Contact {
-	String firstName, lastName, address, city, state, email;
-	long zip, phoneNumber;
+	String firstName, lastName, address, city, state, email,zip,phoneNumber;
+	
 
-	public Contact(String firstName, String lastName, String address, String city, String state, String email, long zip,
-			long phoneNumber) {
+	public Contact(String firstName, String lastName, String address, String city, String state, String email, String phoneNumber,
+			String zip) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -16,12 +16,12 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	
 	}
-	//@Override
-//		public String toString() {
-	//		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="/
-//					+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-	//				+ ", email=" + email + "]";
-	//	}
+	@Override
+		public String toString() {
+			return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
+					+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
+					+ ", email=" + email + "]";
+		}
 	
 
 	public Contact() {
@@ -76,21 +76,26 @@ public class Contact {
 		this.email = email;
 	}
 
-	public long getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(long zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
-	public long getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public void remove(Contact contact) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 	
 }
