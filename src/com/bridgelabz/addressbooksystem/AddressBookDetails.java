@@ -12,6 +12,14 @@ import java.util.stream.Collectors;
 public class AddressBookDetails {
 	Scanner sc = new Scanner(System.in);
 	public ArrayList<Contact> contact = new ArrayList<>();
+	public HashMap<String, ArrayList<Contact>> personByState;
+	public HashMap<String, ArrayList<Contact>> personByCity;
+
+	public AddressBookDetails() {
+		personByCity = new HashMap<String, ArrayList<Contact>>();
+		personByState = new HashMap<String, ArrayList<Contact>>();
+		contact = new ArrayList<>();
+	}
 
 	public void addContact() {
 		System.out.println("Enter the contact details:");
