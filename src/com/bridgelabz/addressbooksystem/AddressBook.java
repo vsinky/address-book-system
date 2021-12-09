@@ -121,17 +121,47 @@ public class AddressBook {
 		}
 		System.out.println("Total number of people in this city " + city + ": " + countPersonInCity);
 	}
-	private void sortContactByName() {
-        for (Entry<String, AddressBookDetails> entry:addressBookListMap.entrySet()){
-            AddressBookDetails value = entry.getValue();
-            List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getFirstName)).collect(Collectors.toList());
 
-            for(Contact contact:sortedList){
-                System.out.println("First Name: "+contact.getFirstName());
-                System.out.println("Last Name: "+contact.getLastName());
-            }   
-        }
+	private void sortContactByName() {
+		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getFirstName))
+					.collect(Collectors.toList());
+
+			for (Contact contact : sortedList) {
+				System.out.println("First Name: " + contact.getFirstName());
+				System.out.println("Last Name: " + contact.getLastName());
+			}
+		}
 	}
+
+	void sortContactByState() {
+		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getState))
+					.collect(Collectors.toList());
+
+			for (Contact contact : sortedList) {
+				System.out.println("First Name: " + contact.getFirstName());
+				System.out.println("Last Name: " + contact.getLastName());
+
+			}
+		}
+	}
+
+	public void sortContactByCity() {
+		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getCity))
+					.collect(Collectors.toList());
+
+			for (Contact contact : sortedList) {
+				System.out.println("First Name: " + contact.getFirstName());
+				System.out.println("Last Name: " + contact.getLastName());
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook addressBook = new AddressBook();
@@ -139,7 +169,9 @@ public class AddressBook {
 		while (flag) {
 			System.out.println("Enter your choice");
 			System.out.println("Select an option\n" + "1] Add New Address Book\n" + "2]Search Contact from a city\n"
-					+ "3]Search Contact from a State\n" +"4]Count Contact By State\n"+"5]Count Contact By City\n"+"6]Sort Contact By Name\n"+ "7]Exit\n" + "Enter your Choice\n");
+					+ "3]Search Contact from a State\n" + "4]Count Contact By State\n" + "5]Count Contact By City\n"
+					+ "6]Sort Contact By Name\n" + "7]Sort Contact By City\n" + "8]Sort Contact By State\n" + "9]Exit\n"
+					+ "Enter your Choice\n");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1: {
@@ -160,12 +192,12 @@ public class AddressBook {
 				addressBook.searchPersonByCity(CityName);
 				break;
 
-			case 3: 
+			case 3:
 				System.out.println("Enter Name of State: ");
 				String StateName = sc.next();
 				addressBook.searchPersonByState(StateName);
 				break;
-			
+
 			case 4:
 				System.out.println("Enter Name of State: ");
 				String stateName2 = sc.next();
@@ -179,10 +211,20 @@ public class AddressBook {
 				break;
 
 			case 6:
-                System.out.println("Sort Contact");
-                addressBook.sortContactByName();
-                
+				System.out.println("Sort Contact");
+				addressBook.sortContactByName();
+
 			case 7:
+				System.out.println("Sort Contact");
+				addressBook.sortContactByCity();
+				break;
+
+			case 8:
+				System.out.println("Sort Contact");
+				addressBook.sortContactByState();
+				break;
+
+			case 9:
 				flag = false;
 				break;
 			}
