@@ -4,49 +4,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class AddressBook {
-	String firstName;
-	String lastName;
-	String address;
-	String city;
-	String state;
-	int zip;
-	String phoneNumber;
-	String email;
-	Scanner sc = new Scanner(System.in);
 
-	AddressBookDetails  ad = new AddressBookDetails ();
-	 Map<String,List > addressBookListMap = new HashMap<>();
+	Scanner sc = new Scanner(System.in);
+	AddressBookDetails ad = new AddressBookDetails();
+	public Map<String, AddressBookDetails> addressBookListMap = new HashMap<>();
 	private String addressBookName;
 
-	
 	public void addAddressBook(String bookName) {
-		AddressBook address = new AddressBook ();
+		AddressBook address = new AddressBook();
 		boolean flag = true;
 
 		while (flag) {
-			System.out.println( "1] Add Contact\n" + "2] Display\n"
-					+ "3] Edit contact\n" + "4] Delete Contact\n" + "5] Exit\n" + "Enter your Choice\n");
+			System.out.println("1] Add Contact\n" + "2] Display\n" + "3] Edit contact\n" + "4] Delete Contact\n"
+					+ "5] Exit\n" + "Enter your Choice\n");
 			int option = sc.nextInt();
 
 			switch (option) {
 			case 1:
-				
+
 				System.out.println("Enter no of contacts to be added");
 				int noOfContacts = sc.nextInt();
 				for (int i = 0; i < noOfContacts; i++) {
 					ad.addContact();
 				}
-				addressBookListMap.put(addressBookName, ad.contact);
+				addressBookListMap.put(addressBookName, ad);
 				System.out.println("Address Book Added Successfully");
 				break;
 
 			case 2:
-				
-					System.out.println("Displayed the Contact");
-                   ad.display();
+
+				System.out.println("Displayed the Contact");
+				ad.display();
 				break;
 
 			case 3:
@@ -59,7 +51,6 @@ public class AddressBook {
 				} else {
 					System.out.println("List Cannot be Edited");
 				}
-				ad.display();
 				break;
 			case 4:
 				System.out.println("Enter the Contact to be deleted:");
@@ -70,7 +61,7 @@ public class AddressBook {
 				} else {
 					System.out.println("List Cannot be Deleted");
 				}
-				ad.display();
+
 				break;
 			case 5:
 				flag = false;
@@ -78,17 +69,35 @@ public class AddressBook {
 
 			}
 		}
+
+	}
+
+	private void searchPersonByState(String stateName) {
+
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByState(stateName);
 		}
-		
-	
+	}
+
+	private void searchPersonByCity(String cityName) {
+
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+			AddressBookDetails value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByCity(cityName);
+		}
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		AddressBook addressBook = new AddressBook();
 		boolean flag = true;
 		while (flag) {
 			System.out.println("Enter your choice");
-			System.out.println("Select an option\n" + "1] Add New Address Book\n"
-					+ "2] Find Duplicate Entry in Address Book\n" + "3]Exit\n" + "Enter your Choice\n");
+			System.out.println("Select an option\n" + "1] Add New Address Book\n" + "2]Search Contact from a city\n"
+					+ "3]Search Contact from a State\n" + "5]Exit\n" + "Enter your Choice\n");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1: {
@@ -98,23 +107,29 @@ public class AddressBook {
 					System.out.println("The Address book Already Exists");
 					break;
 				} else {
-					
+
 					addressBook.addAddressBook(addressBookName);
 					break;
 				}
 			}
-			case 2:{
+			case 2:
+				System.out.println("Enter Name of City: ");
+				String CityName = sc.next();
+				addressBook.searchPersonByCity(CityName);
+				break;
+
+			case 3: {
+				System.out.println("Enter Name of State: ");
+				String StateName = sc.next();
+				addressBook.searchPersonByState(StateName);
+				break;
+			}
+
+			case 4: {
 				flag = false;
-                break;
-			}			
+				break;
+			}
 			}
 		}
 	}
 }
-		
-	
-	
-
-	
-		
-	

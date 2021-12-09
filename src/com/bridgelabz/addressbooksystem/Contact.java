@@ -1,11 +1,10 @@
 package com.bridgelabz.addressbooksystem;
 
 public class Contact {
-	String firstName, lastName, address, city, state, email,zip,phoneNumber;
-	
+	private String firstName, lastName, address, city, state, email, zip, phoneNumber;
 
-	public Contact(String firstName, String lastName, String address, String city, String state, String email, String phoneNumber,
-			String zip) {
+	public Contact(String firstName, String lastName, String address, String city, String state, String email,
+			String phoneNumber, String zip) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -14,9 +13,9 @@ public class Contact {
 		this.email = email;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
-	
+
 	}
-	
+
 	public Contact() {
 
 	}
@@ -84,16 +83,15 @@ public class Contact {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 	public void remove(Contact contact) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
-				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + "]";
+		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
 	}
-	
-	
+
 }
