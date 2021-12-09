@@ -16,14 +16,7 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	
 	}
-	@Override
-		public String toString() {
-			return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
-					+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-					+ ", email=" + email + "]";
-		}
 	
-
 	public Contact() {
 
 	}
@@ -92,10 +85,15 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	}
 	public void remove(Contact contact) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address="
+				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + "]";
+	}
 	
 	
 }
