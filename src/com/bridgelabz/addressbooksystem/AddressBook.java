@@ -1,5 +1,9 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,7 +19,8 @@ public class AddressBook {
 	AddressBookDetails ad = new AddressBookDetails();
 	public Map<String, AddressBookDetails> addressBookListMap = new HashMap<>();
 	private String addressBookName;
-
+	public static ArrayList<Contact> contact;
+	
 	public void addAddressBook(String addressBookName) {
 		AddressBook address = new AddressBook();
 		boolean flag = true;
@@ -27,14 +32,14 @@ public class AddressBook {
 
 			switch (option) {
 			case 1:
-
-				System.out.println("Enter no of contacts to be added");
-				int noOfContacts = sc.nextInt();
-				for (int i = 0; i < noOfContacts; i++) {
-					ad.addContact();
-				}
-				addressBookListMap.put(addressBookName, ad);
-				System.out.println("Address Book Added Successfully");
+				ad.addContact();
+//				System.out.println("Enter no of contacts to be added");
+//				int noOfContacts = sc.nextInt();
+//				for (int i = 0; i < noOfContacts; i++) {
+//					ad.addContact();
+//				}
+//				addressBookListMap.put(addressBookName, ad);
+//				System.out.println("Address Book Added Successfully");
 				break;
 
 			case 2:
@@ -71,10 +76,11 @@ public class AddressBook {
 
 			}
 		}
-
+		addressBookListMap.put(addressBookName, ad);
+		System.out.println("Address Book Added Successfully");
 	}
 
-	private void searchPersonByState(String stateName) {
+	void searchPersonByState(String stateName) {
 
 		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
 			AddressBookDetails value = entry.getValue();
@@ -83,7 +89,7 @@ public class AddressBook {
 		}
 	}
 
-	private void searchPersonByCity(String cityName) {
+	public void searchPersonByCity(String cityName) {
 
 		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
 			AddressBookDetails value = entry.getValue();
@@ -122,8 +128,8 @@ public class AddressBook {
 		System.out.println("Total number of people in this city " + city + ": " + countPersonInCity);
 	}
 
-	private void sortContactByName() {
-		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+	void sortContactByName() {
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
 			AddressBookDetails value = entry.getValue();
 			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getFirstName))
 					.collect(Collectors.toList());
@@ -136,7 +142,7 @@ public class AddressBook {
 	}
 
 	void sortContactByState() {
-		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
 			AddressBookDetails value = entry.getValue();
 			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getState))
 					.collect(Collectors.toList());
@@ -150,7 +156,7 @@ public class AddressBook {
 	}
 
 	public void sortContactByCity() {
-		for (Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
+		for (Map.Entry<String, AddressBookDetails> entry : addressBookListMap.entrySet()) {
 			AddressBookDetails value = entry.getValue();
 			List<Contact> sortedList = value.contact.stream().sorted(Comparator.comparing(Contact::getCity))
 					.collect(Collectors.toList());
@@ -162,72 +168,33 @@ public class AddressBook {
 		}
 	}
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		AddressBook addressBook = new AddressBook();
-		boolean flag = true;
-		while (flag) {
-			System.out.println("Enter your choice");
-			System.out.println("Select an option\n" + "1] Add New Address Book\n" + "2]Search Contact from a city\n"
-					+ "3]Search Contact from a State\n" + "4]Count Contact By State\n" + "5]Count Contact By City\n"
-					+ "6]Sort Contact By Name\n" + "7]Sort Contact By City\n" + "8]Sort Contact By State\n" + "9]Exit\n"
-					+ "Enter your Choice\n");
-			int option = sc.nextInt();
-			switch (option) {
-			case 1: {
-				System.out.println("Enter the Name of Address Book: ");
-				String addressBookName = sc.next();
-				if (addressBook.addressBookListMap.containsKey(addressBookName)) {
-					System.out.println("The Address book Already Exists");
-					break;
-				} else {
+	//file IO operation
+    public static void writeData(AddressBook addressBook) {
+        StringBuffer personBuffer = new StringBuffer();
+        contact.forEach(person -> {
+            String personDataString = person.toString().concat("\n");
+            personBuffer.append(personDataString);
+        });
+        try {
+            Files.write(Paths.get("Data.txt"), personBuffer.toString().getBytes());
 
-					addressBook.addAddressBook(addressBookName);
-					break;
-				}
-			}
-			case 2:
-				System.out.println("Enter Name of City: ");
-				String CityName = sc.next();
-				addressBook.searchPersonByCity(CityName);
-				break;
+        } catch (IOException e) {
+            e.printStackTrace();
 
-			case 3:
-				System.out.println("Enter Name of State: ");
-				String StateName = sc.next();
-				addressBook.searchPersonByState(StateName);
-				break;
+        }
+    }
 
-			case 4:
-				System.out.println("Enter Name of State: ");
-				String stateName2 = sc.next();
-				addressBook.CountByState(stateName2);
-				break;
+    public static void readData(AddressBook addressBoo) {
+        try {
+            Files.lines(new File("Data.txt").toPath()).map(String::trim).forEach(System.out::println);
 
-			case 5:
-				System.out.println("Enter Name of City: ");
-				String cityName2 = sc.next();
-				addressBook.CountByCity(cityName2);
-				break;
+        } catch (IOException e) {
+            e.printStackTrace();
 
-			case 6:
-				System.out.println("Sort Contact");
-				addressBook.sortContactByName();
+        }
+    }
 
-			case 7:
-				System.out.println("Sort Contact");
-				addressBook.sortContactByCity();
-				break;
 
-			case 8:
-				System.out.println("Sort Contact");
-				addressBook.sortContactByState();
-				break;
-
-			case 9:
-				flag = false;
-				break;
-			}
-		}
-	}
+	
+	
 }

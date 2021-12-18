@@ -1,5 +1,9 @@
 package com.bridgelabz.addressbooksystem;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,16 +16,17 @@ import java.util.stream.Collectors;
 public class AddressBookDetails {
 	Scanner sc = new Scanner(System.in);
 	public ArrayList<Contact> contact = new ArrayList<>();
-	public HashMap<String, ArrayList<Contact>> personByState;
-	public HashMap<String, ArrayList<Contact>> personByCity;
+	public Map<String, ArrayList<Contact>> personByState;
+	public Map<String, ArrayList<Contact>> personByCity;
 
 	public AddressBookDetails() {
-		personByCity = new HashMap<String, ArrayList<Contact>>();
-		personByState = new HashMap<String, ArrayList<Contact>>();
+		//personByCity = new Map<String, ArrayList<Contact>>();
+		//personByState = new Map<String, ArrayList<Contact>>();
 		contact = new ArrayList<>();
 	}
 
-	public void addContact() {
+	public List<Contact> addContact() {
+		
 		System.out.println("Enter the contact details:");
 		System.out.println("Enter First Name");
 		String firstName = sc.next();
@@ -52,8 +57,11 @@ public class AddressBookDetails {
 
 			Contact contactDetails = new Contact(firstName, lastName, address, city, state, email, phoneNumber, zip);
 			contact.add(contactDetails);
-			System.out.println(contactDetails);
+		
+			System.out.println("contactDetails");
 		}
+		return contact;
+		
 	}
 
 	public boolean editContact(String Name) {
@@ -128,5 +136,4 @@ public class AddressBookDetails {
 			System.out.println("Last Name: " + contact.getLastName());
 		}
 	}
-
 }
